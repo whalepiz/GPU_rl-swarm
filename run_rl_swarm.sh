@@ -31,8 +31,6 @@ export HOST_MULTI_ADDRS
 export IDENTITY_PATH
 export ORG_ID
 export HF_HUB_DOWNLOAD_TIMEOUT=120
-export CPU_ONLY=1
-export CUDA_VISIBLE_DEVICES=""
 
 # Set default values for environment variables if not already defined
 DEFAULT_PUB_MULTI_ADDRS=""
@@ -313,6 +311,8 @@ else
     # Extract ORG_ID from userData.json
     ORG_ID=$(awk 'BEGIN { FS = "\"" } !/^[ \t]*[{}]/ { print $(NF - 1); exit }' modal-login/temp-data/userData.json)
     echo -e "\n${CYAN}ORG_ID has been set to: ${BOLD}$ORG_ID\n${NC}"
+
+    echo -e "${CYAN}Waiting for API key to become activated...${NC}"
 
     # Cleanup function for graceful shutdown
     cleanup() {
